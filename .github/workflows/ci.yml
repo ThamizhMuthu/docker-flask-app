@@ -1,0 +1,25 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Build the Docker image
+        run: docker build -t flask-app:${{ github.sha }} .
+
+      - name: Start the container
+        run: docker run -d -p 5000:5000 --name test flask-app:${{ github.sha }}
+
+      - name: Wait for the app to come up
+        run: sleep 5
+
+      - name: Check the health endpoint
+        run: curl -f http://localhost:5000/health
+
+      - name: Clean up
+        run: docker rm -f test
