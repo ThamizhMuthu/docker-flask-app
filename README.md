@@ -1,5 +1,8 @@
 # docker-flask-app
 
+![CI](https://github.com/ThamizhMuthu/docker-flask-app/actions/workflows/ci.yml/badge.svg)
+
+
 Small Flask app I containerized while learning Docker. Two endpoints, one Dockerfile, and a GitHub Actions workflow that builds it on every push.
 
 ## Endpoints
